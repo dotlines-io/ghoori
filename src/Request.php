@@ -26,6 +26,6 @@ abstract class Request implements IRequest
      */
     final public function send(): array
     {
-        return RequestHelper::send_request($this->requestMethod, $this->url, $this->headers(), $this->params());
+        return RequestHelper::send_request($this->requestMethod ?? 'POST', $this->url, $this->headers(), $this->params());
     }
 }
