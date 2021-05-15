@@ -16,6 +16,7 @@ class RefreshTokenRequest extends Request
 
     private function __construct(string $url, string $accessToken, int $clientID, string $clientSecret, string $refreshToken)
     {
+        $this->requestMethod = 'POST';
         $this->url = $url;
         $this->accessToken = $accessToken;
 

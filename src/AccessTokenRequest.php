@@ -17,6 +17,7 @@ class AccessTokenRequest extends Request
 
     private function __construct(string $url, string $username, string $password, int $clientID, string $clientSecret)
     {
+        $this->requestMethod = 'POST';
         $this->url = $url;
         $this->username = $username;
         $this->password = $password;
