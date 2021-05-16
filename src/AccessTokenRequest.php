@@ -7,10 +7,10 @@ use Dotlines\Core\Request;
 
 class AccessTokenRequest extends Request
 {
-    private $username;
-    private $password;
-    private $clientID;
-    private $clientSecret;
+    private string $username;
+    private string $password;
+    private int $clientID;
+    private string $clientSecret;
 
     public static function getInstance(string $url, string $username, string $password, int $clientID, string $clientSecret): AccessTokenRequest
     {

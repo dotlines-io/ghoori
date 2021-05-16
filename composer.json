@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.4|^8.0",
         "ext-json": "*",
         "dotlines-io/core": "^1.0",
         "guzzlehttp/guzzle": "^7.3"

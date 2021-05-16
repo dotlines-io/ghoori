@@ -7,9 +7,9 @@ use Dotlines\Core\Request;
 
 class RefreshTokenRequest extends Request
 {
-    private $clientID;
-    private $clientSecret;
-    private $refreshToken;
+    private int $clientID;
+    private string $clientSecret;
+    private string $refreshToken;
 
     public static function getInstance(string $url, string $accessToken, int $clientID, string $clientSecret, string $refreshToken): RefreshTokenRequest
     {
