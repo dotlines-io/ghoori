@@ -1,6 +1,10 @@
 # Changelog
 
-All notable changes to `ghoori` package will be listed in this file.
+All notable changes to `dotlines-io/ghoori` package will be listed in this file.
+
+## 1.0.3 - 2021-05-16
+
+- Introduces dotlines-io/core as the parent package
 
 ## 1.0.2 - 2021-05-16
 

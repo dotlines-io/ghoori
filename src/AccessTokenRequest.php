@@ -3,6 +3,8 @@
 
 namespace Dotlines\Ghoori;
 
+use Dotlines\Core\Request;
+
 class AccessTokenRequest extends Request
 {
     private $username;

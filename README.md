@@ -1,4 +1,4 @@
-# Ghoori Subscription Composer Package
+# Ghoori Package
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/dotlines-io/ghoori.svg?style=flat-square)](https://packagist.org/packages/dotlines-io/ghoori)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/dotlines-io/ghoori/run-tests?label=tests)](https://github.com/dotlines-io/ghoori/actions?query=workflow%3ATests+branch%3Amaster)
