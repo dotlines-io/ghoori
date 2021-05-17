@@ -36,6 +36,7 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+          echo "action_state=yellow" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
@@ -49,6 +50,7 @@ jobs:
           echo CLIENT_ID=$CLIENT_ID >> .env
           echo CLIENT_SECRET=$CLIENT_SECRET >> .env
           cat .env
+          echo "${{ env.action_state }}"
 
       - name: Execute tests
         run: vendor/bin/phpunit
