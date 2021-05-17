@@ -34,13 +34,19 @@ jobs:
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Create .env file
+        env:
+          SERVER_URL: ${{ secrets.SERVER_URL }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         run: |
           touch .env
-          echo SECRET=${{ secrets.SERVER_URL }} >> .env
-          echo SECRET=${{ secrets.USERNAME }} >> .env
-          echo SECRET=${{ secrets.PASSWORD }} >> .env
-          echo SECRET=${{ secrets.CLIENT_ID }} >> .env
-          echo SECRET=${{ secrets.CLIENT_SECRET }} >> .env
+          echo SERVER_URL=${SERVER_URL} >> .env
+          echo USERNAME=${USERNAME} >> .env
+          echo PASSWORD=${PASSWORD} >> .env
+          echo CLIENT_ID=${CLIENT_ID} >> .env
+          echo CLIENT_SECRET=${CLIENT_SECRET} >> .env
           cat .env
 
       - name: Execute tests
