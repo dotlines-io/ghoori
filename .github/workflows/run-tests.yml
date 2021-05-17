@@ -41,6 +41,7 @@ jobs:
           echo SECRET=${{ secrets.PASSWORD }} >> .env
           echo SECRET=${{ secrets.CLIENT_ID }} >> .env
           echo SECRET=${{ secrets.CLIENT_SECRET }} >> .env
+          cat .env
 
       - name: Execute tests
         run: vendor/bin/phpunit
