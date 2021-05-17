@@ -1,8 +1,13 @@
 name: Tests
 
-environment: test
-
 on: [push, pull_request]
+
+env:
+  SERVER_URL: ${{ secrets.SERVER_URL }}
+  USERNAME: ${{ secrets.USERNAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
 jobs:
   test:
@@ -33,22 +38,16 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
-        env:
-          SERVER_URL: ${{ secrets.SERVER_URL }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Create .env file
         run: |
           touch .env
-          echo SERVER_URL=${SERVER_URL} >> .env
-          echo USERNAME=${USERNAME} >> .env
-          echo PASSWORD=${PASSWORD} >> .env
-          echo CLIENT_ID=${CLIENT_ID} >> .env
-          echo CLIENT_SECRET=${CLIENT_SECRET} >> .env
+          echo SERVER_URL=$SERVER_URL >> .env
+          echo USERNAME=$USERNAME >> .env
+          echo PASSWORD=$PASSWORD >> .env
+          echo CLIENT_ID=$CLIENT_ID >> .env
+          echo CLIENT_SECRET=$CLIENT_SECRET >> .env
           cat .env
 
       - name: Execute tests
