@@ -31,15 +31,15 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-
-      - name: Create .env file
         env:
           SERVER_URL: ${{ secrets.SERVER_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+      - name: Create .env file
         run: |
           touch .env
           echo SERVER_URL=${SERVER_URL} >> .env
