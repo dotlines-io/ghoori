@@ -1,5 +1,7 @@
 name: Tests
 
+environment: test
+
 on: [push, pull_request]
 
 jobs:
