@@ -5,7 +5,6 @@
 
 namespace Dotlines\Ghoori\Tests;
 
-use Dotenv\Dotenv;
 use Dotlines\Ghoori\AccessTokenRequest;
 use JsonException;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +23,12 @@ class AccessTokenRequestTest extends TestCase
     final public function it_can_fetch_access_token(): void
     {
         $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
+        $tokenResponse = $accessTokenRequest->send();
 
-        self::assertNotEmpty($accessTokenRequest->send());
+        self::assertNotEmpty($tokenResponse);
+        self::assertArrayHasKey('token_type', $tokenResponse);
+        self::assertArrayHasKey('expires_in', $tokenResponse);
+        self::assertArrayHasKey('access_token', $tokenResponse);
+        self::assertArrayHasKey('refresh_token', $tokenResponse);
     }
 }
