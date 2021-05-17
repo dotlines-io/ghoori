@@ -4,7 +4,6 @@
 
 namespace Dotlines\Ghoori\Tests;
 
-use Dotlines\Core\Request;
 use Dotlines\Ghoori\AccessTokenRequest;
 use JsonException;
 use PHPUnit\Framework\TestCase;
