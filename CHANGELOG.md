@@ -2,6 +2,10 @@
 
 All notable changes to `dotlines-io/ghoori` package will be listed in this file.
 
+## 1.0.8 - 2021-05-18
+
+- Updated the test status showing badge
+
 ## 1.0.7 - 2021-05-18
 
 - Introduces some mandatory Automated Tests
