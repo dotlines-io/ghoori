@@ -2,6 +2,10 @@
 
 All notable changes to `dotlines-io/ghoori` package will be listed in this file.
 
+## 1.0.5 - 2021-05-17
+
+- Makes dotlines-io/core v1.0.3 mandatory for latest releases
+
 ## 1.0.4 - 2021-05-17
 
 - Sets minimum PHP version to PHP 7.4
