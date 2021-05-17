@@ -2,13 +2,6 @@ name: Tests
 
 on: [push, pull_request]
 
-env:
-  SERVER_URL: ${{ secrets.SERVER_URL }}
-  USERNAME: ${{ secrets.USERNAME }}
-  PASSWORD: ${{ secrets.PASSWORD }}
-  CLIENT_ID: ${{ secrets.CLIENT_ID }}
-  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -39,6 +32,15 @@ jobs:
 
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+      - name: Create .env file
+        run: |
+          touch .env
+          echo SECRET=${{ secrets.SERVER_URL }} >> .env
+          echo SECRET=${{ secrets.USERNAME }} >> .env
+          echo SECRET=${{ secrets.PASSWORD }} >> .env
+          echo SECRET=${{ secrets.CLIENT_ID }} >> .env
+          echo SECRET=${{ secrets.CLIENT_SECRET }} >> .env
 
       - name: Execute tests
         run: vendor/bin/phpunit

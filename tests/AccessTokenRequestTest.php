@@ -4,6 +4,7 @@
 
 namespace Dotlines\Ghoori\Tests;
 
+use Dotenv\Dotenv;
 use Dotlines\Ghoori\AccessTokenRequest;
 use JsonException;
 use PHPUnit\Framework\TestCase;
@@ -15,6 +16,9 @@ class AccessTokenRequestTest extends TestCase
      */
     final public function it_can_fetch_access_token(): void
     {
+        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+
         $tokenUrl = getenv('SERVER_URL') . '/oauth/token';
         $username = getenv('USERNAME');
         $password = getenv('PASSWORD');
