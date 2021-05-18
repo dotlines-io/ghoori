@@ -6,10 +6,10 @@
 namespace Dotlines\Ghoori\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
+use Exception;
 use GuzzleHttp\Exception\ClientException;
 use JsonException;
 use PHPUnit\Framework\TestCase;
-use Exception;
 
 class AccessTokenRequestTest extends TestCase
 {
