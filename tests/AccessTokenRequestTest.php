@@ -149,7 +149,7 @@ class AccessTokenRequestTest extends TestCase
      */
     final public function it_gets_exception_with_wrong_client_id(): void
     {
-        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, 29, $this->clientSecret);
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, 99999, $this->clientSecret);
         $this->expectException(ClientException::class);
         $accessTokenRequest->send();
     }
