@@ -5,12 +5,9 @@
 
 namespace Dotlines\Ghoori\Tests;
 
-
 use Dotlines\Ghoori\AccessTokenRequest;
-use GuzzleHttp\Exception\ClientException;
 use JsonException;
 use PHPUnit\Framework\TestCase;
-use Exception;
 
 class AccessTokenRequestTest extends TestCase
 {
@@ -34,6 +31,7 @@ class AccessTokenRequestTest extends TestCase
         self::assertArrayHasKey('access_token', $tokenResponse);
         self::assertArrayHasKey('refresh_token', $tokenResponse);
     }
+
 
     /**
      * @test
@@ -139,4 +137,5 @@ class AccessTokenRequestTest extends TestCase
         $this->expectException(ClientException::class);
         $accessTokenRequest->send();
     }
+
 }

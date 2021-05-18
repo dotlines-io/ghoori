@@ -7,7 +7,7 @@ namespace Dotlines\Ghoori\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\Ghoori\RefreshTokenRequest;
-use JsonException;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class RefreshTokenRequestTest extends TestCase
@@ -37,5 +37,21 @@ class RefreshTokenRequestTest extends TestCase
         self::assertArrayHasKey('expires_in', $refreshTokenResponse);
         self::assertArrayHasKey('access_token', $refreshTokenResponse);
         self::assertArrayHasKey('refresh_token', $refreshTokenResponse);
+    }
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_empty_url(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
+        $tokenResponse = $accessTokenRequest->send();
+
+        $accessToken = $tokenResponse['access_token'];
+        $refreshToken = $tokenResponse['refresh_token'];
+
+        $refreshTokenRequest = RefreshTokenRequest::getInstance("", $accessToken, $this->clientID, $this->clientSecret, $refreshToken);
+        $this->expectException(Exception::class);
+        $refreshTokenRequest->send();
     }
 }
