@@ -6,6 +6,8 @@
 namespace Dotlines\Ghoori\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
+use Exception;
+use GuzzleHttp\Exception\ClientException;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 
@@ -39,6 +41,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
     final public function it_gets_exception_with_empty_url(): void
     {
@@ -49,6 +52,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
     final public function it_gets_exception_with_wrong_url(): void
     {
@@ -59,6 +63,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
     final public function it_gets_exception_with_empty_username(): void
     {
@@ -69,6 +74,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
     final public function it_gets_exception_with_wrong_username(): void
     {
@@ -79,6 +85,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
 
     final public function it_gets_exception_with_empty_password(): void
@@ -90,6 +97,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
 
     final public function it_gets_exception_with_wrong_password(): void
@@ -101,6 +109,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
 
     final public function it_gets_exception_with_empty_client_secret(): void
@@ -112,6 +121,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
 
     final public function it_gets_exception_with_wrong_client_secret(): void
@@ -124,6 +134,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
     final public function it_gets_exception_with_negative_client_id(): void
     {
@@ -134,6 +145,7 @@ class AccessTokenRequestTest extends TestCase
 
     /**
      * @test
+     * @throws JsonException
      */
     final public function it_gets_exception_with_wrong_client_id(): void
     {
