@@ -7,8 +7,8 @@ namespace Dotlines\Ghoori\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\Ghoori\RefreshTokenRequest;
-use PHPUnit\Framework\TestCase;
 use Exception;
+use PHPUnit\Framework\TestCase;
 
 class RefreshTokenRequestTest extends TestCase
 {
@@ -54,5 +54,4 @@ class RefreshTokenRequestTest extends TestCase
         $this->expectException(Exception::class);
         $refreshTokenRequest->send();
     }
-
 }
