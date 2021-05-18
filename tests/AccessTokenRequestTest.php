@@ -6,8 +6,6 @@
 namespace Dotlines\Ghoori\Tests;
 
 use Dotlines\Ghoori\AccessTokenRequest;
-use Exception;
-use GuzzleHttp\Exception\ClientException;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 
@@ -32,25 +30,5 @@ class AccessTokenRequestTest extends TestCase
         self::assertArrayHasKey('expires_in', $tokenResponse);
         self::assertArrayHasKey('access_token', $tokenResponse);
         self::assertArrayHasKey('refresh_token', $tokenResponse);
-    }
-
-    /**
-     * @test
-     */
-    final public function it_gets_exception_with_empty_url(): void
-    {
-        $accessTokenRequest = AccessTokenRequest::getInstance("", $this->username, $this->password, $this->clientID, $this->clientSecret);
-        $this->expectException(Exception::class);
-        $accessTokenRequest->send();
-    }
-
-    /**
-     * @test
-     */
-    final public function it_gets_exception_with_negative_client_id(): void
-    {
-        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, -27, $this->clientSecret);
-        $this->expectException(ClientException::class);
-        $accessTokenRequest->send();
     }
 }
