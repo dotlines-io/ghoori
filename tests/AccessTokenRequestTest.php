@@ -68,7 +68,7 @@ class AccessTokenRequestTest extends TestCase
     final public function it_gets_exception_with_empty_username(): void
     {
         $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, "", $this->password, $this->clientID, $this->clientSecret);
-        $this->expectException(Exception::class);
+        $this->expectException(ClientException::class);
         $accessTokenRequest->send();
     }
 
@@ -91,7 +91,7 @@ class AccessTokenRequestTest extends TestCase
     final public function it_gets_exception_with_empty_password(): void
     {
         $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, "", $this->clientID, $this->clientSecret);
-        $this->expectException(Exception::class);
+        $this->expectException(ClientException::class);
         $accessTokenRequest->send();
     }
 
@@ -115,7 +115,7 @@ class AccessTokenRequestTest extends TestCase
     final public function it_gets_exception_with_empty_client_secret(): void
     {
         $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, "");
-        $this->expectException(Exception::class);
+        $this->expectException(ClientException::class);
         $accessTokenRequest->send();
     }
 
