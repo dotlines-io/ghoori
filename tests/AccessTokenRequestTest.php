@@ -35,4 +35,110 @@ class AccessTokenRequestTest extends TestCase
         self::assertNotEmpty($tokenResponse['access_token']);
         self::assertNotEmpty($tokenResponse['refresh_token']);
     }
+
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_empty_url(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance("", $this->username, $this->password, $this->clientID, $this->clientSecret);
+        $this->expectException(Exception::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_wrong_url(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance("https://sb-payments.ghoori.com.bd/oauth", $this->username, $this->password, $this->clientID, $this->clientSecret);
+        $this->expectException(ClientException::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_empty_username(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, "", $this->password, $this->clientID, $this->clientSecret);
+        $this->expectException(Exception::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_wrong_username(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, "wronguser", $this->password, $this->clientID, $this->clientSecret);
+        $this->expectException(ClientException::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+
+    final public function it_gets_exception_with_empty_password(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, "", $this->clientID, $this->clientSecret);
+        $this->expectException(Exception::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+
+    final public function it_gets_exception_with_wrong_password(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, "wrongpassword", $this->clientID, $this->clientSecret);
+        $this->expectException(ClientException::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+
+    final public function it_gets_exception_with_empty_client_secret(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, "");
+        $this->expectException(Exception::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+
+    final public function it_gets_exception_with_wrong_client_secret(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, "wrongclientsecret");
+        $this->expectException(ClientException::class);
+        $accessTokenRequest->send();
+    }
+
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_negative_client_id(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, -27, $this->clientSecret);
+        $this->expectException(ClientException::class);
+        $accessTokenRequest->send();
+    }
+
+    /**
+     * @test
+     */
+    final public function it_gets_exception_with_wrong_client_id(): void
+    {
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, 29, $this->clientSecret);
+        $this->expectException(ClientException::class);
+        $accessTokenRequest->send();
+    }
 }
