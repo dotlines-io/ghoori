@@ -29,6 +29,12 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+          if [ "$TEST" == ""TestVal" ]
+          then
+            echo "Got TEST"
+          fi
+        env:
+          TEST: ${{ secrets.TEST }}
 
       - name: Install dependencies
         run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
