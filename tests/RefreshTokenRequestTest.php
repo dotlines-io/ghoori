@@ -1,6 +1,7 @@
 <?php
 
 /** @noinspection SpellCheckingInspection */
+
 /** @noinspection MethodVisibilityInspection */
 
 namespace Dotlines\Ghoori\Tests;
@@ -8,7 +9,10 @@ namespace Dotlines\Ghoori\Tests;
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\Ghoori\RefreshTokenRequest;
 use Exception;
+use JsonException;
 use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 
 class RefreshTokenRequestTest extends TestCase
 {
@@ -17,19 +21,28 @@ class RefreshTokenRequestTest extends TestCase
     public string $password = 'Nopass1234';
     public int $clientID = 27;
     public string $clientSecret = 'HmlIb5kqJnA9N9c79E8WzgZ6Hsoh1d5oyMbNruAw';
+    public string $accessToken = "";
+    public string $refreshToken = "";
+
+    /**
+     * @throws JsonException
+     */
+    function setUp(): void
+    {
+        parent::setUp();
+        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
+        $tokenResponse = $accessTokenRequest->send();
+
+        $this->accessToken = $tokenResponse['access_token'];
+        $this->refreshToken = $tokenResponse['refresh_token'];
+    }
 
     /** @test
      * @throws JsonException
      */
     final public function it_can_refresh_access_token(): void
     {
-        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
-        $tokenResponse = $accessTokenRequest->send();
-
-        $accessToken = $tokenResponse['access_token'];
-        $refreshToken = $tokenResponse['refresh_token'];
-
-        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $accessToken, $this->clientID, $this->clientSecret, $refreshToken);
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
         $refreshTokenResponse = $refreshTokenRequest->send();
 
         self::assertNotEmpty($refreshTokenResponse);
@@ -40,18 +53,122 @@ class RefreshTokenRequestTest extends TestCase
     }
 
     /**
-     * @test
+     * Testing $tokenUrl param
      */
-    final public function it_gets_exception_with_empty_url(): void
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_empty_tokenUrl(): void
     {
-        $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
-        $tokenResponse = $accessTokenRequest->send();
-
-        $accessToken = $tokenResponse['access_token'];
-        $refreshToken = $tokenResponse['refresh_token'];
-
-        $refreshTokenRequest = RefreshTokenRequest::getInstance("", $accessToken, $this->clientID, $this->clientSecret, $refreshToken);
+        $this->tokenUrl = "";
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
         $this->expectException(Exception::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_wrong_tokenUrl(): void
+    {
+        $this->tokenUrl = "sdasdadssad";
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ConnectException::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * Testing $clientID param
+     */
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_clientID_zero(): void
+    {
+        $this->clientID = 0;
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(Exception::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_negative_clientID(): void
+    {
+        $this->clientID = -27;
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ClientException::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_wrong_clientID(): void
+    {
+        $this->clientID = 9999999999;
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ClientException::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_large_clientID(): void
+    {
+        $this->clientID = 99999999999;
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ClientException::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * Testing $clientSecret param
+     */
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_empty_clientSecret(): void
+    {
+        $this->clientSecret = "";
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ClientException::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_integer_clientSecret(): void
+    {
+        $this->clientSecret = 22;
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ClientException::class);
+        $refreshTokenRequest->send();
+    }
+
+    /**
+     * @test
+     * @throws JsonException
+     */
+    final public function it_gets_exception_with_wrong_clientSecret(): void
+    {
+        $this->clientSecret = "sssssssssssssssssssssssssssssssssssssssss";
+        $refreshTokenRequest = RefreshTokenRequest::getInstance($this->tokenUrl, $this->accessToken, $this->clientID, $this->clientSecret, $this->refreshToken);
+        $this->expectException(ClientException::class);
         $refreshTokenRequest->send();
     }
 }
