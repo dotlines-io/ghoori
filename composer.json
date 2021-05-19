@@ -21,10 +21,9 @@
         "guzzlehttp/guzzle": "^7.3"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.17",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",
-        "spatie/ray": "^1.10",
         "vimeo/psalm": "^4.3"
     },
     "autoload": {

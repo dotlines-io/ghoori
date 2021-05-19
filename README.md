@@ -5,6 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/dotlines-io/ghoori/Check%20&%20fix%20styling?label=code%20style)](https://github.com/dotlines-io/ghoori/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 [![Psalm](https://github.com/dotlines-io/ghoori/actions/workflows/psalm.yml/badge.svg)](https://github.com/dotlines-io/ghoori/actions/workflows/psalm.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/dotlines-io/ghoori.svg?style=flat-square)](https://packagist.org/packages/dotlines-io/ghoori)
+[![Total Downloads](https://badgen.net/packagist/php/dotlines-io/ghoori)](https://packagist.org/packages/dotlines-io/ghoori)
 
 ---
 
