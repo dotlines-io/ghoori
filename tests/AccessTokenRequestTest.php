@@ -28,7 +28,7 @@ class AccessTokenRequestTest extends TestCase
         $tokenResponse = $accessTokenRequest->send();
 
         self::assertNotEmpty($tokenResponse);
-        self::assertArrayHasKey('url', $tokenResponse);
+        self::assertArrayHasKey('token_type', $tokenResponse);
         self::assertArrayHasKey('expires_in', $tokenResponse);
         self::assertArrayHasKey('access_token', $tokenResponse);
         self::assertArrayHasKey('refresh_token', $tokenResponse);
