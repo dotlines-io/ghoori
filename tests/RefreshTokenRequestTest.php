@@ -9,10 +9,10 @@ namespace Dotlines\Ghoori\Tests;
 use Dotlines\Ghoori\AccessTokenRequest;
 use Dotlines\Ghoori\RefreshTokenRequest;
 use Exception;
-use JsonException;
-use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
+use JsonException;
+use PHPUnit\Framework\TestCase;
 
 class RefreshTokenRequestTest extends TestCase
 {
@@ -27,7 +27,7 @@ class RefreshTokenRequestTest extends TestCase
     /**
      * @throws JsonException
      */
-    function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
         $accessTokenRequest = AccessTokenRequest::getInstance($this->tokenUrl, $this->username, $this->password, $this->clientID, $this->clientSecret);
