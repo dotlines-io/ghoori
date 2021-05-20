@@ -2,9 +2,13 @@
 
 All notable changes to `dotlines-io/ghoori` package will be listed in this file.
 
+## 1.0.9 - 2021-05-20
+
+- Improves package security
+
 ## 1.0.8 - 2021-05-19
 
-- Updates dependecies
+- Updates dependencies
 
 ## 1.0.7 - 2021-05-18
 
